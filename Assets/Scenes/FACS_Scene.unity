@@ -756,7 +756,7 @@ MonoBehaviour:
   leftUiStartPosition: {x: 30, y: 30}
   leftUiWidth: 415
   rightUiStartPosition: {x: 30, y: 30}
-  rightUiWidth: 500
+  rightUiWidth: 450
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
