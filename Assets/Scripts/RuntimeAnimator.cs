@@ -51,7 +51,9 @@ public class RuntimeAnimator : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
 
     [SerializeField] private List<ActionUnit> actionUnits = new List<ActionUnit>();
+    public List<ActionUnit> ActionUnits => actionUnits;
     [SerializeField] private List<Emotion> emotions = new List<Emotion>();
+    public List<Emotion> Emotions => emotions;
     
     [Header("Global UI")]
     
@@ -104,6 +106,17 @@ public class RuntimeAnimator : MonoBehaviour
     // Scroll positions for the UI panels
     private Vector2 leftUiScrollPosition;
     private Vector2 rightUiScrollPosition;
+
+
+    public void SetActionUnits(List<ActionUnit> newAUs)
+    {
+        actionUnits = newAUs;
+    }
+
+    public void SetEmotions(List<Emotion> newEmotions)
+    {
+        emotions = newEmotions;
+    }
     
     private void Start()
     {
@@ -142,12 +155,12 @@ public class RuntimeAnimator : MonoBehaviour
     
     private void InitializeEmotions()
     {
-        emotions.Add(new Emotion("Anger", GetAUsByName(new string[2]{"AU_06", "AU_12"})));
-        emotions.Add(new Emotion("Disgust", GetAUsByName(new string[2]{"AU_06", "AU_12"})));
-        emotions.Add(new Emotion("Fear",GetAUsByName(new string[2]{"AU_06", "AU_12"})));
+        emotions.Add(new Emotion("Anger", GetAUsByName(new string[4]{"AU_04", "AU_05", "AU_07", "AU_23"})));
+        emotions.Add(new Emotion("Disgust", GetAUsByName(new string[3]{"AU_09", "AU_15", "AU_16"})));
+        emotions.Add(new Emotion("Fear",GetAUsByName(new string[7]{"AU_01", "AU_02", "AU_04", "AU_05", "AU_07", "AU_20", "AU_26"})));
         emotions.Add(new Emotion("Happiness", GetAUsByName(new string[2]{"AU_06", "AU_12"})));
-        emotions.Add(new Emotion("Sadness", GetAUsByName(new string[2]{"AU_06", "AU_12"})));
-        emotions.Add(new Emotion("Surprise",GetAUsByName(new string[2]{"AU_06", "AU_12"})));
+        emotions.Add(new Emotion("Sadness", GetAUsByName(new string[3]{"AU_01", "AU_04", "AU_15"})));
+        emotions.Add(new Emotion("Surprise",GetAUsByName(new string[4]{"AU_01", "AU_02", "AU_05", "AU_26"})));
     }
     
     /// <summary>
