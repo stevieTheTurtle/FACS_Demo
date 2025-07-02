@@ -121,21 +121,23 @@ public class RuntimeAnimator : MonoBehaviour
     private void Start()
     {
         skinnedMeshRenderer = this.GetComponentInChildren<SkinnedMeshRenderer>();
-
-        //Retrieve actual AU BlendShapes
-        for (int i = 0; i < skinnedMeshRenderer.sharedMesh.blendShapeCount; i++)
-        {
-            string bsName = skinnedMeshRenderer.sharedMesh.GetBlendShapeName(i);
-            if (bsName.Contains("AU") && ! (bsName.Contains("_L_") || bsName.Contains("_R_") ))
-            {
-                MatchCollection matches = Regex.Matches(bsName, "AU_..");
-                
-                actionUnits.Add(new ActionUnit(matches[0].Value, i, 0.0f));
-                Debug.Log($"{matches[0].Value} : {i}");
-            }
-        }
         
-        InitializeEmotions();
+        if(actionUnits.Count == 0)
+            //Retrieve actual AU BlendShapes
+            for (int i = 0; i < skinnedMeshRenderer.sharedMesh.blendShapeCount; i++)
+            {
+                string bsName = skinnedMeshRenderer.sharedMesh.GetBlendShapeName(i);
+                if (bsName.Contains("AU") && ! (bsName.Contains("_L_") || bsName.Contains("_R_") ))
+                {
+                    MatchCollection matches = Regex.Matches(bsName, "AU_..");
+                    
+                    actionUnits.Add(new ActionUnit(matches[0].Value, i, 0.0f));
+                    Debug.Log($"{matches[0].Value} : {i}");
+                }
+            }
+        
+        if(emotions.Count == 0)
+            InitializeEmotions();
     }
 
     List<ActionUnit> GetAUsByName(string[] auNames)
@@ -173,6 +175,7 @@ public class RuntimeAnimator : MonoBehaviour
         if (labelStyle == null)
         {
             labelStyle = new GUIStyle(GUI.skin.label);
+            labelStyle.normal.textColor = Color.black;
             sliderStyle = new GUIStyle(GUI.skin.horizontalSlider);
             thumbStyle = new GUIStyle(GUI.skin.horizontalSliderThumb);
         }
